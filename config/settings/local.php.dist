@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'db' => [
+        'driver' => 'pdo_mysql',
+        'user' => 'test',
+        'password' => 'test',
+        'host' => 'localhost',
+        'dbname' => 'test',
+        'driverOptions' => [
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+        ]
+    ],
+    'auth' => [
+        'adminName' => 'admin',
+        'adminPassword' => '123',
+    ],
+    'debug' => false,
+];

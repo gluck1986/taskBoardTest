@@ -1,0 +1,27 @@
+{% extends 'layout/default.html.twig' %}
+{# @var loginDto App\Services\Dto\LoginDto #}
+
+{% block title %}Login{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Login" />
+{% endblock %}
+
+{% block content %}
+    <ul class="list-group">
+        {% for error in loginDto.errors %}
+            <li class="list-group-item list-group-item-danger">{{ error }}</li></li>
+        {% endfor %}
+    </ul>
+    <form class="form-signin" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Имя</label>
+        <input type="text" id="inputName" value="{{ loginDto.name }}" class="form-control" name="name"
+               placeholder="Name" required autofocus>
+        <label for="inputPassword" class="sr-only">Пароль</label>
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+{% endblock %}
+
+

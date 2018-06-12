@@ -1,0 +1,77 @@
+{% extends 'layout/default.html.twig' %}
+{% import '/macros/common/textField.macro.html.twig' as field %}
+{% import '/app/task/item.html.twig' as item %}
+{# @var taskDto App\Services\Dto\TaskDto #}
+
+{% block title %}Создание задачи{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Make task" />
+{% endblock %}
+
+{% block content %}
+    <ul class="list-group">
+        {% for error in taskDto.errors %}
+            <li class="list-group-item list-group-item-danger">{{ error }}</li>
+        {% endfor %}
+    </ul>
+<div class="jumbotron">
+    <form method="post" enctype="multipart/form-data">
+        <h2>Создание задачи</h2>
+        {{ field.text('userName','Имя пользователя', taskDto.userName) }}
+        <label for="input-email">Email</label>
+        <input value="{{ taskDto.email }}" type="email" class="form-control" id="input-email"
+                name="email" required>
+
+        <label for="input-image">Изображение</label>
+        <input type="file" class="form-control" id="input-image"
+               accept=".jpg, .jpeg, .png" name="image">
+        {{ field.textArea('description', 'Задача', taskDto.description) }}
+        <br/>
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Предварительный просмотр
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Предварительный просмотр</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{ item.item(0,  '', '', '', '', false) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button class="btn btn-default" type="submit">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('#myModal').on('show.bs.modal', function (event) {
+        $('#task-name-0').text($('#input-userName').val());
+        $('#task-email-0').text($('#input-email').val());
+        $('#task-description-0').text($('#input-description').val());
+        //console.log($('#input-image'));
+        const files = $('#input-image')[0].files;
+
+        if (files.length > 0) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = $('#task-img-0');
+                output[0].src = reader.result;
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    })
+</script>
+{% endblock %}
+
+

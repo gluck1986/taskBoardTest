@@ -1,0 +1,24 @@
+{% macro item(id, name, email, description, image, resolved) %}
+<div class="jumbotron">
+        <div class="media">
+            <div class="media-left media-middle">
+                    <img id="task-img-{{ id }}" class="media-object" src="/upload/{{ image }}"
+                    style="max-width: 320px; max-height: 240px"
+                    >
+            </div>
+            <div class="media-body">
+                <h4 id="task-name-{{ id }}" class="media-heading">{{ name }}
+                    {% if resolved %}
+                    <span data-toggle="tooltip" data-placement="right" title="Готово"
+                          class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    {% else %}
+                        <span data-toggle="tooltip" data-placement="right" title="В процессе"
+                                class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    {% endif %}
+                </h4>
+                <h5 id="task-email-{{ id }}">{{ email }}</h5>
+                <p id="task-description-{{ id }}">{{ description }}</p>
+            </div>
+        </div>
+</div>
+{% endmacro %}

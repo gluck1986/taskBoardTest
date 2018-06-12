@@ -1,0 +1,10 @@
+{% macro text(name, label, value, placeHolder) %}
+    <label for="input-{{ name }}">{{ label }}</label>
+    <input value="{{ value }}" type="text" class="form-control" id="input-{{ name }}"
+           placeholder="{{ placeHolder|default(label) }}" name="{{ name }}">
+{% endmacro %}
+{% macro textArea(name, label, value, placeHolder) %}
+    <label for="input-{{ name }}">{{ label }}</label>
+    <textarea name="{{ name }}" class="form-control" placeholder="{{ placeHolder|default(label) }}"
+              id="input-{{ name }}">{{ value }}</textarea>
+{% endmacro %}

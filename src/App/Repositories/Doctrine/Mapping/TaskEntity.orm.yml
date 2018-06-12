@@ -1,0 +1,33 @@
+App\Entities\TaskEntity:
+  repositoryClass: App\Repositories\Doctrine\TaskRepository
+  type: entity
+  table: task
+  id:
+      id:
+        type: integer
+        generator:
+          strategy: AUTO
+  fields:
+    userName:
+      column: user_name
+      type: string
+      length: 255
+      nullable: false
+    email:
+      column: email
+      type: string
+      length: 255
+      nullable: false
+    description:
+      column: description
+      type: text
+      nullable: false
+    image:
+      column: image
+      type: string
+      length: 255
+      nullable: true
+    resolved:
+      column: resolved
+      type: boolean
+      nullable: false

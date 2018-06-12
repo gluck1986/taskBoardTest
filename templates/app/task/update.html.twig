@@ -1,0 +1,47 @@
+{% extends 'layout/default.html.twig' %}
+{% import '/macros/common/textField.macro.html.twig' as field %}
+{% import '/app/task/item.html.twig' as item %}
+{# @var taskDto App\Services\Dto\TaskDto #}
+
+{% block title %}Редактирование задачи{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Edit task"/>
+{% endblock %}
+
+{% block content %}
+    <ul class="list-group">
+        {% for error in taskDto.errors %}
+            <li class="list-group-item list-group-item-danger">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    <div class="jumbotron">
+        <div class="media">
+            <div class="media-left media-middle">
+                <img class="media-object" src="/upload/{{ taskDto.image }}"
+                     style="max-width: 320px; max-height: 240px"
+                >
+            </div>
+            <div class="media-body">
+                <h2>Редактирование задачи</h2>
+                <h4 class="media-heading">{{ taskDto.userName }}</h4>
+                <h5>{{ taskDto.email }}</h5>
+            </div>
+        </div>
+        <form method="post">
+            <div class="form-group">
+                {{ field.textArea('description', 'Задача', taskDto.description) }}
+            </div>
+            <div class="form-group">
+                <label class=""><input type="checkbox" name="resolved" {% if taskDto.resolved %}checked{% endif %}>
+                    Задача разрешена</label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+
