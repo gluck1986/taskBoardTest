@@ -3,7 +3,7 @@
 use Symfony\Component\Console\Application;
 
 $rootDir = dirname(dirname(__DIR__));
-$webDir = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public';
+$webDir = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR;
 $configDir = $rootDir . DIRECTORY_SEPARATOR . 'config';
 $vendorDir = $rootDir . DIRECTORY_SEPARATOR . 'vendor';
 
